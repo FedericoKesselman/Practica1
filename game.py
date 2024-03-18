@@ -21,7 +21,7 @@ for i in range(max_attempts):
     letter = input("Ingresa una letra: ").lower()
 
      # Verificar si la letra ya ha sido adivinada
-    if letter in guessed_letters:
+    if letter in guessed_letters and letter != "":
         print("Ya has intentado con esa letra. Intenta con otra.")
         continue
 
@@ -29,13 +29,13 @@ for i in range(max_attempts):
     guessed_letters.append(letter)
 
     # Verificar si la letra está en la palabra secreta
-    if letter in secret_word:
+    if letter in secret_word and letter != "":
         print("¡Bien hecho! La letra está en la palabra.")
     else:
         print("Lo siento, la letra no está en la palabra.")
 
     # Mostrar la palabra parcialmente adivinada
-        letters = []
+    letters = []
     for letter in secret_word:
         if letter in guessed_letters:
             letters.append(letter)
@@ -46,9 +46,8 @@ for i in range(max_attempts):
     print(f"Palabra: {word_displayed}")
     # Verificar si se ha adivinado la palabra completa
     if word_displayed == secret_word:
-        print(f"¡Felicidades! Has adivinado la palabra secreta:
-{secret_word}")
-    break
+        print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
+        break
 else:
     print(f"¡Oh no! Has agotado tus {max_attempts} intentos.")
     print(f"La palabra secreta era: {secret_word}")
