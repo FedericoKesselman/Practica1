@@ -12,8 +12,26 @@ guessed_letters = []
 print("¡Bienvenido al juego de adivinanzas!")
 print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
 
-word_displayed = "_" * len(secret_word)
-# Mostrarla palabra parcialmente adivinada
+# Pedir al usuario que ingrese dificultad 
+difficulty = int(input("Dificultad del juego (1: Facil, 2: Medio, 3: Dificil): ")) 
+
+if difficulty == 3: 
+    # En dificil se mantiene codigo anterior
+    word_displayed = "_" * len(secret_word)
+elif difficulty == 2:
+    # Se muestra primera y ultima letra. Son agregadas a la lista de letras
+    word_displayed = secret_word[0] + "_" * (len(secret_word)-2) + secret_word[-1]
+    guessed_letters.append(secret_word[0])
+    guessed_letters.append(secret_word[-1])
+else:
+    # Se muestran vocales. Son agregadas a la lista de letras
+    vowels = "aeiou"
+    word_displayed = "".join([letter if letter in vowels else "_" for letter in secret_word]) 
+    
+    for letter in secret_word:
+        if letter in vowels:
+                guessed_letters.append(letter)
+
 print(f"Palabra: {word_displayed}")
 
 while attempts < 10:
@@ -22,7 +40,7 @@ while attempts < 10:
 
      # Verificar si la letra ya ha sido adivinada
     if letter in guessed_letters and letter != "":
-        print("Ya has intentado con esa letra. Intenta con otra.")
+        print("Ya cuentas con esa letra. Intenta con otra.")
         continue
 
     # Agregar la letra a la lista de letras adivinadas
